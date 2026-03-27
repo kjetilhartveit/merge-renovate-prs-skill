@@ -61,6 +61,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 
 1. Merge in open pull requests (by renovatebot) where all checks have passed.
 2. Install latest package versions (with e.g. `pnpm install`).
+   - Make sure we are using the latest transitive dependencies in case there are merge conflicts.
 3. Run type checking, linting and build. If any of them fails, then we should fix them before proceeding.
 4. Make sure the new branch is pushed, and check the results/checks in CI/GitHub workflow. If the job fails in CI, then we go back to step 3 and try again.
    - If we can't fix the errors within a reasonable amount of effort, then leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
@@ -72,6 +73,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 2. For each pull request with any failed checks (by renovatebot):
    1. Merge in the pull request.
    2. Install latest package versions (with e.g. `pnpm install`).
+      - Make sure we are using the latest transitive dependencies in case there are merge conflicts.
    3. Run type checking, linting and build. If any of them fails, then we should fix them before proceeding.
    4. Push the fixes and see the results in CI/GitHub workflow. If the job fails in CI, then we go back to step c for the pull request and try again.
       - If the task is unresolvable (perhaps due to an open issue in the third-party dependency) then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
