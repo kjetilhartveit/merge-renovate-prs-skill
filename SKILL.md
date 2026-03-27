@@ -56,6 +56,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
   3. Have created a new branch with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
 - Commit often when suitable.
 - Do not close processed PRs, these will automatically be handled by renovatebot once the pull request is merged in.
+- Do not delete any PRs.
 
 ## Processing open pull requests where all checks passed:
 
