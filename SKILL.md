@@ -35,7 +35,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 
    ## Breaking changes
 
-   {bullet list of breaking changes including links to breaking change/changelog}
+   {bullet list of the breaking changes; include a short description of the actual breaking changes and including links to official sources for reading more}
 
    ## Pull requests
 
@@ -55,6 +55,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
   2. You have installed latest package versions (with e.g. `pnpm install`).
   3. Have created a new branch with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
 - Commit often when suitable.
+- Do not close processed PRs, these will automatically be handled by renovatebot once the pull request is merged in.
 
 ## Processing open pull requests where all checks passed:
 
