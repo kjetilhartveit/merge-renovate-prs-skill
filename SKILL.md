@@ -1,10 +1,9 @@
-## Title:
+---
+name: merge-renovate-pull-requests
+description: This skill is used to attempt to merge in pull requests opened by Renovatebot, but which are not automatically merged.
+---
 
-Merge renovate pull requests skill
-
-## Description:
-
-This skill is used to attempt to merge in pull requests opened by Renovatebot, but which are not automatically merged.
+# Merge renovate pull requests
 
 ## When to use:
 
@@ -27,34 +26,34 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 
 1. When we want to log agent merges we append the following information to `AGENT_MERGE.md` (in the root folder of the repo).
 
-    ```
-    # {agent merge concise title}
+   ```
+   # {agent merge concise title}
 
-    Date: {date and time}
+   Date: {date and time}
 
-    {summary of changes}
+   {summary of changes}
 
-    ## Breaking changes
+   ## Breaking changes
 
-    {bullet list of breaking changes including links to breaking change/changelog}
+   {bullet list of breaking changes including links to breaking change/changelog}
 
-    ## Pull requests
+   ## Pull requests
 
-    {bullet list with links to pull requests}
+   {bullet list with links to pull requests}
 
-    {comments header and comments if there are any}
+   {comments header and comments if there are any}
 
-    {separator between entries, use the `---` separator}
-    ```
+   {separator between entries, use the `---` separator}
+   ```
 
 2. Then we commit and push the changes.
 
 # Main workflow:
 
 - Before starting a workflow make sure:
-    1. You are on the `main` branch and pull latest git changes.
-    2. You have installed latest package versions (with e.g. `pnpm install`).
-    3. Have created a new branch with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
+  1. You are on the `main` branch and pull latest git changes.
+  2. You have installed latest package versions (with e.g. `pnpm install`).
+  3. Have created a new branch with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
 - Commit often when suitable.
 
 ## Processing open pull requests where all checks passed:
@@ -63,16 +62,16 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 2. Install latest package versions (with e.g. `pnpm install`).
 3. Run type checking, linting and build. If any of them fails, then we should fix them before proceeding.
 4. Make sure the new branch is pushed, and check the results/checks in CI/GitHub workflow. If the job fails in CI, then we go back to step 3 and try again.
-    - If we can't fix the errors within a reasonable amount of effort, then leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
+   - If we can't fix the errors within a reasonable amount of effort, then leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 5. Log agent merges.
 
 ## Processing open pull requests where any checks failed:
 
 1. We should process open pull requests where any checks have failed one by one.
 2. For each pull request with any failed checks (by renovatebot):
-    1. Merge in the pull request.
-    2. Install latest package versions (with e.g. `pnpm install`).
-    3. Run type checking, linting and build. If any of them fails, then we should fix them before proceeding.
-    4. Push the fixes and see the results in CI/GitHub workflow. If the job fails in CI, then we go back to step c for the pull request and try again.
-        - If the task is unresolvable (perhaps due to an open issue in the third-party dependency) then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
+   1. Merge in the pull request.
+   2. Install latest package versions (with e.g. `pnpm install`).
+   3. Run type checking, linting and build. If any of them fails, then we should fix them before proceeding.
+   4. Push the fixes and see the results in CI/GitHub workflow. If the job fails in CI, then we go back to step c for the pull request and try again.
+      - If the task is unresolvable (perhaps due to an open issue in the third-party dependency) then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 3. Log agent merges.
