@@ -53,7 +53,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 - Before starting a workflow make sure:
   1. You are on the `main` branch and pull latest git changes.
   2. You have installed latest package versions (with e.g. `pnpm install`).
-  3. Have created a new branch with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
+  3. Have created a new branch and PR with an unique name with this format `agent-merge-{yyyy}-{MM}-{hh}-{mm}-{ss}` (replace placeholders/vars with current date in UTC).
 - Commit often when suitable.
 - Do not close processed PRs, these will automatically be handled by renovatebot once the pull request is merged in.
 - Do not delete any branches.
@@ -79,3 +79,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
    4. Push the fixes and see the results in CI/GitHub workflow. If the job fails in CI, then we go back to step c for the pull request and try again.
       - If the task is unresolvable (perhaps due to an open issue in the third-party dependency) then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 3. Log agent merges.
+
+## After processing all open pull requests:
+
+1. After we have processed all open pull requests and checks are passing, then we can merge the new branch into the `main` branch.
