@@ -7,12 +7,13 @@ description: This skill is used to attempt to merge in pull requests opened by R
 
 ## When to use:
 
-When doing routinely maintenance and when Renovatebot has created pull requests which are not automatically merged. They may not have been automatically merged because there's a major version update, the checks failed or other reasons.
+When doing routinely maintenance and when Renovatebot has created pull requests which are not automatically merged. They pull requests may not have been automatically merged because there's a major version update, the checks failed or other reasons.
 
 ## Caveats:
 
 - Do not attempt to process pull requests which are not created by Renovatebot (username might be `renovate` and author id might be `app/renovate`).
 - We should only process open pull requests.
+- When updating versions with breaking changes (updating major versions or if the major version is 0) then it's very important to read and understand all the breaking changes and how to update correctly/safely. The breaking changes, and sometimes links to official documentation, can be found in the pull request description or in the changelog of the GitHub repo of the dependency to update. We should follow the official migration guides if available. If the changes are significant, affect the architecture and/or requires migrations on external systems like databases or production systems then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 
 ## Tools:
 
@@ -59,7 +60,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
 - Do not close processed PRs, these will automatically be handled by renovatebot once the pull request is merged in.
 - Do not delete any branches.
 
-## Processing open pull requests where all checks passed:
+## 1. Processing open pull requests where all checks passed:
 
 1. Merge in open pull requests (by renovatebot) where all checks have passed.
 2. Install latest package versions (with e.g. `pnpm install`).
@@ -69,7 +70,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
    - If we can't fix the errors within a reasonable amount of effort, then leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 5. Log agent merges.
 
-## Processing open pull requests where any checks failed:
+## 2. Processing open pull requests where any checks failed:
 
 1. We should process open pull requests where any checks have failed one by one.
 2. For each pull request with any failed checks (by renovatebot):
@@ -81,6 +82,6 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
       - If the task is unresolvable (perhaps due to an open issue in the third-party dependency) then we should leave it to the user to resolve it manually. Leave a comment in the pull request explaining this and then abort the current workflow.
 3. Log agent merges.
 
-## After processing all open pull requests:
+## 3. After processing all open pull requests:
 
 1. After we have processed all open pull requests and checks are passing, then we can merge the new branch into the `main` branch.
