@@ -38,6 +38,7 @@ You may use the GitHub CLI to get fetch pull requests from the GitHub repo, see 
   - `esModuleInterop` and `allowSyntheticDefaultImports` are now always true, so these can probably be removed.
   - `noUncheckedSideEffectImports` now defaults to true, so this can probably be removed.
 - `module` syntax now yields an error, we should rather use `namespace`. Note that ambient module declaration form is still fully acceptable.
+- Make sure that VSCode is using the TypeScript version of the workspace. `.vscode/settings.json` should have `typescript.tsdk` set to the path of the TypeScript version of the workspace (e.g. `"typescript.tsdk": "node_modules\\typescript\\lib"`).
 - Blog post announcing TypeScript 6.0: https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/
   - You may read more about the changes in the blog post if needed.
 
